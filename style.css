@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: blanchedalmond;
+    text-align: center;
+}
+
+
+header {
+    font-size: 30px;
+    padding: 20px;
+    color: brown;
+}
+.pokemonGrid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 50px;
+}
+
+.pokemonCard {
+    width: 200px;
+    height: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: black;
+    background-color: brown;
+    margin: 5px;
+    color: white;
+}
+
+img {
+    width: 150px;
+    height: 150px; 
+    border-radius: 5px 5px 0 0;
+}
+
+.container {
+    padding: 2px 16px;
+}
