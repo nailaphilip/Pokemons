@@ -17,6 +17,18 @@ const buttonPressed = (e) => {
     limit = generations[2].limit;
     offset = generations[2].offset;
   }
+  if (choice == "4") {
+    limit = generations[3].limit;
+    offset = generations[3].offset;
+  }
+  if (choice == "5") {
+    limit = generations[4].limit;
+    offset = generations[4].offset;
+  }
+  if (choice == "6") {
+    limit = generations[5].limit;
+    offset = generations[5].offset;
+  }
 
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
     .then((res) => res.json())
@@ -49,7 +61,14 @@ const generations = [
 ];
 
 const pokeData = (json) => {
-  pokeGrid.innerHTML = json
+  const filteredData = json.filter((pokemon) => {
+    const searchValue = searchInput.value.toLowerCase();
+    return pokemon.types.some((type) =>
+      type.type.name.toLowerCase().includes(searchValue)
+    );
+  });
+
+  pokeGrid.innerHTML = filteredData
     .map(
       (pokemon) => `<div class="pokemonGrid"> 
     <div class="pokemonCard">
@@ -63,33 +82,7 @@ const pokeData = (json) => {
   console.log(pokeData);
 };
 
-searchInput.addEventListener("input", (e) => {
-  let value = e.target.value;
-
-  if (value && value.trim().length > 0) {
-    value = value.trim().toLowerCase();
-    data = pokeData();
-    const filteredPokemon = data.results.filter((pokemon) => {
-      return pokemon.types.some((type) => type.type.name === value);
-    });
-    filteredPokemon.forEach((pokemon) => {
-      console.log(pokemon.type);
-    });
-  }
+searchInput.addEventListener("input", () => {
+  const currentChoice = document.querySelector(".btn.active").id;
+  buttonPressed({ target: { id: currentChoice } });
 });
-
-//   fetch('https://pokeapi.co/api/v2/pokemon')
-//   .then(response => response.json())
-//   .then(data => {
-//     const desiredType = 'fire';
-//     const filteredPokemon = data.results.filter(pokemon => {
-//       return pokemon.types.some(type => type.type.name === desiredType);
-//     });
-//     filteredPokemon.forEach(pokemon => {
-//       console.log(pokemon.name);
-//     });
-//   });
-// });
-
-// pokemon.types.filter((type) => {
-//     return type.type.name.includes(value);

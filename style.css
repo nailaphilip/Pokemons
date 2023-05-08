@@ -43,3 +43,7 @@ img {
 .container {
     padding: 2px 16px;
 }
+
+.btn :active {
+    background-color: aqua;
+}
